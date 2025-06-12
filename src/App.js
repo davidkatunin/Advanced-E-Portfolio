@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
+// use these links for inspiration:
+// https://intertapes.net/map/
+// https://www.jonasreymondin.com/profile
+
 function App() {
   return (
     <div className="App">
