@@ -1,28 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Navbar from './components/Navbar';
 
-// use these links for inspiration:
-// https://intertapes.net/map/
 // https://www.jonasreymondin.com/profile
+// https://intertapes.net/map/
 
 function App() {
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      setShowNavbar(currentScroll > 20); // Show when user scrolls down > 20px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar show={showNavbar} />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes>
+    </Router>
   );
 }
 
